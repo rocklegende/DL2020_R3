@@ -7,6 +7,14 @@ from torch.autograd import Variable
 
 
 class ContractiveAutoencoder(nn.Module):
+    """
+    Simple contractive autoencoder with a single hidden layer.
+
+    Constructor parameters:
+        - num_inputs: Number of input features
+        - num_hidden_layer_inputs: Number of input features for the single hidden layer
+    """
+
     def __init__(self, num_inputs, num_hidden_layer_inputs):
         super(ContractiveAutoencoder, self).__init__()
         self.num_inputs = num_inputs
