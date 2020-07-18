@@ -40,7 +40,7 @@ class ContractiveAutoencoder(nn.Module):
         return h1, h2
 
 
-def loss_function(W, x, recons_x, h, lam):
+def loss_function(W, x, recons_x, h, jacobian_weight):
     """Compute the Contractive AutoEncoder Loss
     Evalutes the CAE loss, which is composed as the summation of a Mean
     Squared Error and the weighted l2-norm of the Jacobian of the hidden
@@ -55,7 +55,7 @@ def loss_function(W, x, recons_x, h, lam):
           N_batch x N.
         `h` (Variable): the hidden units of the network, with dims
           batch_size x N_hidden
-        `lam` (float): the weight given to the jacobian regulariser term
+        `jacobian_weight` (float): the weight given to the jacobian regulariser term
     Returns:
         Variable: the (scalar) CAE loss
     """
@@ -69,4 +69,4 @@ def loss_function(W, x, recons_x, h, lam):
     # unsqueeze to avoid issues with torch.mv
     w_sum = w_sum.unsqueeze(1)  # shape N_hidden x 1
     contractive_loss = torch.sum(torch.mm(dh ** 2, w_sum), 0)
-    return mse + contractive_loss.mul_(lam)
+    return mse + contractive_loss.mul_(jacobian_weight)
