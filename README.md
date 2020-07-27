@@ -13,7 +13,7 @@ and put the ```data.csv``` into ```src/data/``` (So the full path is ```src/data
 First execute ```src/train.py``` to train the model. After this process the 
 model parameters are stored in ```src/model.pt```
 
-### Get recommendations
+### Get recommendations for Spotify song id
 Execute ```test.py``` to get song recommendations. If you execute
 this Python script you will be asked to input a Spotify song id. Please use Kaggle
 to search for the song id of the song you want to input. For this go to ```data.csv``` file
@@ -24,4 +24,11 @@ Use the filter for ```artists``` or ```name``` to search for artists or track na
 
 After you found a track, copy the ```id``` and paste it into the prompt.
 
-Output are 10 recommendations for the input song.
+Output are topk recommendations for the input song.
+
+### Default Example (no input)
+If you just want to get a default example and not input a song id, then execute 
+
+```default_example.py``` 
+
+This will show recommendations based on the first song of the dataset.
