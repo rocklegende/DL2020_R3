@@ -24,10 +24,15 @@ class DataLoader:
     def one_hot_encode(self, df, columns):
         return pd.get_dummies(df, columns=columns)
 
-    def load_data(self):
-        songs = pd.read_csv(self.path).drop(discard_features, axis=1)
+
+    def get_filtered_songs(self):
+        songs = pd.read_csv(self.path)
         popular_songs = songs[songs['popularity'] >= self.popularity_cutoff]
-        normalized = self.normalize(popular_songs, normalize_features)
+        return popular_songs
+
+    def get_dataset(self):
+        filtered_songs = self.get_filtered_songs().drop(discard_features, axis=1)
+        normalized = self.normalize(filtered_songs, normalize_features)
         one_hot_encoded = self.one_hot_encode(normalized, ['key'])
         return data.TensorDataset(torch.tensor(one_hot_encoded.values))
 
@@ -42,7 +47,7 @@ class DataLoader:
         return indices[split:], indices[:split]
 
     def get_preprocessed_data(self):
-        dataset = self.load_data()
+        dataset = self.get_dataset()
         train_indices, val_indices = self.get_split(dataset)
         train_sampler = data.SubsetRandomSampler(train_indices)
         valid_sampler = data.SubsetRandomSampler(val_indices)
