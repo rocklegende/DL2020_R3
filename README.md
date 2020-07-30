@@ -11,7 +11,15 @@ Please make sure you have the required python modules in ```requirements.txt``` 
 
 ### Download data
 Please download the CSV dataset from https://www.kaggle.com/yamaerenay/spotify-dataset-19212020-160k-tracks
-and put the ```data.csv``` into ```src/data/``` (So the full path is ```src/data/data.csv```)
+
+Create new folder ```data``` inside ```src```
+
+```buildoutcfg
+cd src
+mkdir data
+```
+
+Put all files from the dataset into ```src/data/``` (So the full path for data.csv is ```src/data/data.csv```)
 
 ### Training
 First execute ```src/train.py``` to train the model. After this process the 

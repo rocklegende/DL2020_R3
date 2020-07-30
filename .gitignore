@@ -1,5 +1,5 @@
 # Project Stuff
-src/data/
+src/data/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
