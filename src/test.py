@@ -10,7 +10,22 @@ def print_song_information(song):
     print("Song name: {}".format(song['name']))
     print("Song artists: {}".format(song['artists']))
     print("Spotify URI: spotify:track:{}".format(song['id']))
+    print("Spotify URL: https://open.spotify.com/track/{}".format(song['id']))
 
+
+def get_song_index(spotify_id, available_songs):
+    query_result = available_songs[available_songs['id'] == spotify_id.strip()]
+    query_result_row_indices = query_result.index.values.astype(int)
+    if len(query_result_row_indices) > 0:
+        dataframe_song_index = query_result_row_indices[0]
+        # since the input dataframe could be filtered the dataframe index might not be the real index anymore
+        # this is why a search for the first occurence of the dataframe index is needed to get the absolute index
+        absolute_song_index = numpy.where(available_songs.index.values == dataframe_song_index)[0][0]
+        return absolute_song_index
+    else:
+        print(
+            "Could not find song with that ID, maybe it got filtered out in preprocessing or the ID doesn't exist")
+        return None
 
 def prompt_user_for_song(available_songs):
     """
@@ -24,18 +39,11 @@ def prompt_user_for_song(available_songs):
     did_find_song_or_exited = False
     while not did_find_song_or_exited:
         input_id = input("Please input Spotify Song id: \n")
-        query_result = available_songs[available_songs['id'] == input_id.strip()]
-        query_result_row_indices = query_result.index.values.astype(int)
-        if len(query_result_row_indices) > 0:
-            dataframe_song_index = query_result_row_indices[0]
-            # since the input dataframe could be filtered the dataframe index might not be the real index anymore
-            # this is why a search for the first occurence of the dataframe index is needed to get the absolute index
-            absolute_song_index = numpy.where(available_songs.index.values == dataframe_song_index)[0][0]
-            did_find_song_or_exited = True
-        else:
-            print(
-                "Could not find song with that ID, maybe it got filtered out in preprocessing or the ID doesn't exist")
-    return absolute_song_index
+        absolute_index = get_song_index(input_id, available_songs)
+        if absolute_index is not None:
+          return absolute_index
+
+    # return absolute_song_index
 
 
 def get_song_recommendations(input_song_index, k, loader):

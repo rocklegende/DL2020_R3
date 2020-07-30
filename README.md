@@ -5,6 +5,10 @@ The dataset that is used is the publicly available dataset from Kaggle,
 called [the Spotify Dataset](https://www.kaggle.com/yamaerenay/spotify-dataset-19212020-160k-tracks), with 160k+ Tracks released inbetween 1921 and 2020.
 
 ## How to execute
+
+### Install required python modules
+Please make sure you have the required python modules in ```requirements.txt``` installed.
+
 ### Download data
 Please download the CSV dataset from https://www.kaggle.com/yamaerenay/spotify-dataset-19212020-160k-tracks
 and put the ```data.csv``` into ```src/data/``` (So the full path is ```src/data/data.csv```)

@@ -59,7 +59,7 @@ def loss_function(W, x, recons_x, h, jacobian_weight):
     Returns:
         Variable: the (scalar) CAE loss
     """
-    mse_loss = nn.BCELoss(size_average=False)
+    mse_loss = nn.MSELoss(size_average=False)
     mse = mse_loss(recons_x, x)
     # Since: W is shape of N_hidden x N. So, we do not need to transpose it as
     # opposed to #1
