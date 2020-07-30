@@ -6,7 +6,7 @@ import numpy as np
 
 discard_features = ['id', 'artists', 'release_date', 'name']
 normalize_features = ['duration_ms', 'popularity', 'tempo', 'loudness', 'year']
-batch_size = 10
+batch_size = 4
 
 
 def get_first_artist(artist_string):

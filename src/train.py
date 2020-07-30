@@ -76,7 +76,7 @@ num_inputs = 26
 num_hidden_layer_inputs = 10
 jacobian_weight = 1e-4
 num_epochs = 10
-learning_rate = 0.0001
+learning_rate = 0.001
 save_path = 'model.pt'
 
 if __name__ == '__main__':
