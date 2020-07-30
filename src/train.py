@@ -16,6 +16,7 @@ class ModelTrainer:
             num_epochs (int): Number of epochs to perform on training
             learning_rate (float): The learning rate to apply
         """
+
     def __init__(self, model, loader, num_inputs, jacobian_weight=1e-4, num_epochs=15, learning_rate=0.0001):
         self.model = model
         self.num_inputs = num_inputs
@@ -79,7 +80,6 @@ learning_rate = 0.001
 save_path = 'model.pt'
 
 if __name__ == '__main__':
-
     autoencoder_model = ContractiveAutoencoder(num_inputs, num_hidden_layer_inputs)
     loader = DataLoader('data/data.csv')
     # instantiate model trainer
